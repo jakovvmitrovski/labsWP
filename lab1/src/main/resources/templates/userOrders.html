@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <h3 style="display: inline">Orders for user: </h3>
+    <h3 style="display: inline" th:text="${session.clientName}"></h3><br/>
+    <h3 style="display: inline">with address: </h3>
+    <h3 style="display: inline" th:text="${session.clientAddress}"></h3>
+</head>
+<body>
+    <ul>
+        <li th:each="order : ${orders}"><th:span th:text="${order.getBalloonColor()}"></th:span>  <th:span th:text=" ${order.getBalloonSize()} "></th:span>
+                <!--            <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">-->
+<!--                <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>-->
+<!--            </form>-->
+<!--            <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>-->
+            <!--            <form th:action="@{'/shopping-cart/add-product/{id}' (id=${product.getId()})}" th:method="POST">-->
+            <!--                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-trash">Add product to cart</i></button>-->
+            <!--            </form>-->
+        </li>
+    </ul> <br/>
+    <a th:href="@{'/balloons'}" th:method="get">Order more ballons</a>
+</body>
+</html>

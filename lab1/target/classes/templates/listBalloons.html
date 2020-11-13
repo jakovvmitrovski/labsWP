@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Balloon Order page - Welcome and choose a Balloon</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Balloon Shop App</h1>
+    <h3 th:if="${hasError}" style="color:red"><th:block th:text="${error}"></th:block></h3>
+</header>
+<main>
+
+    <ul>
+        <li th:each="balloon : ${balloons}"><th:span th:text="${balloon.getName()}"></th:span>  <th:span th:text=" ${balloon.getDescription()} "></th:span> <th:span th:text="${balloon.getManufacturer().getName()}"></th:span>
+            <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
+                <button type="submit">Delete</button>
+            </form>
+            <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>
+<!--            <form th:action="@{'/shopping-cart/add-product/{id}' (id=${product.getId()})}" th:method="POST">-->
+<!--                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-trash">Add product to cart</i></button>-->
+<!--            </form>-->
+        </li>
+    </ul>
+
+    <a th:href="@{'balloons/add'}" th:method="get"> Add balloon </a>
+
+<!--    <ul>-->
+<!--        <li th:each="filtered : ${fballoons}"><th:block th:text="${filtered.getName()}"></th:block></li>-->
+<!--    </ul>-->
+
+    <h2>Choose balloon color:</h2>
+    <form th:method="POST" th:action="@{/selectBalloon}">
+        <input type="radio" name="color" value="Red Balloon"> Red Balloon<br/>
+        <input type="radio" name="color" value="Green Balloon"> Green Balloon<br/>
+        <input type="radio" name="color" value="Yellow Balloon"> Yellow Balloon<br/>
+        <input type="radio" name="color" value="Blue Balloon"> Blue Balloon<br/>
+
+        <br/>
+        <input type="submit" value="Submit">
+    </form>
+    <br/>
+
+
+</main>
+</body>
+</html>
